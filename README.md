@@ -2,6 +2,7 @@
 
 Repository for my workshop at [WordCamp Catania 2019](https://2019.catania.wordcamp.org/)
 
+---
 ## Step 1
 
 Let's install *PHPUnit*:
