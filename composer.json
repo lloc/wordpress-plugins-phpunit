@@ -1,6 +1,17 @@
 {
+    "name": "wccta/wordpress-plugins-phpunit",
+    "description": "Unittests for WordPress plugins (without WP)",
+    "type": "wordpress-plugin",
     "require-dev": {
         "phpunit/phpunit": "^8.3",
         "brain/monkey": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "wccta\\": "src/wccta"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
     }
 }
