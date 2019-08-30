@@ -3,6 +3,7 @@
 Repository for my workshop at [WordCamp Catania 2019](https://2019.catania.wordcamp.org/)
 
 ---
+
 ## Step 1
 
 Let's install *PHPUnit*:
@@ -28,13 +29,13 @@ This will install also [Mockery](http://docs.mockery.io/en/latest/) and [Patchwo
 
 ## Step 3
 
-Let's create a directory that will be the home for our test:
+Let's create a directory that will be the home for a small test-class *WcctaTest.php*:
 
 `mkdir -p tests/wccta`
 
 Excellent! Now let's create a *phpunit.xml* configuration file in the root directory.
 
-> You could also decide to run your tests with the configuration parameters from the command-line. See the next part (hint: 'scripts'!  
+> You could also decide to run your tests with the configuration parameters from the command-line. See the next part (hint: 'scripts')!  
 
 Great! Now let's add some sections to *composer.json* file:
 
@@ -43,3 +44,19 @@ Great! Now let's add some sections to *composer.json* file:
 - **type**: defines the code as WordPress plugin 
 - **autoload**: Let's use a PSR-4 autoloader!
 - **scripts**: now you can just type `composer test`
+
+## Step 4
+
+Your system or PHP version is not up to date? You could skip this step but let's try something [not so] new!
+
+[Get docker](https://docs.docker.com/install/) first:
+
+`sudo apt-get install docker-ce docker-ce-cli containerd.io`
+
+Lets build our Docker image:
+
+`docker build -t plugin .`
+
+Now we can run any command we'd like:
+
+`docker run -it --rm --name wccta plugin composer test`  
