@@ -55,8 +55,8 @@ Your system or PHP version is not up to date? You could skip this step but let's
 
 Lets build our Docker image:
 
-`docker build -t plugin .`
+`docker-compose up`
 
 Now we can run any command we'd like:
 
-`docker run -it --rm --name wccta plugin composer test`  
+`docker-compose run plugin composer test`  
