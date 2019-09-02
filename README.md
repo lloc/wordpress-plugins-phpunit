@@ -59,4 +59,14 @@ Lets build our Docker image:
 
 Now we can run any command we'd like:
 
-`docker-compose run plugin composer test`  
+`docker-compose run plugin composer test`
+
+## Step 5
+
+Lets create a directory and a fist class that contains the code that we will test soon.
+
+```
+mkdir -p src/wccta && touch src/wccta/Plugin.php
+rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
+touch wordpress-plugins-phpunit.php
+```
