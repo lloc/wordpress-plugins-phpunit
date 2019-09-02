@@ -1,0 +1,6 @@
+version: '3'
+services:
+  plugin:
+    build: .
+    volumes:
+      - .:/usr/src/wccta
