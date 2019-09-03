@@ -1,8 +1,6 @@
-FROM php:7.3-alpine3.10
+FROM php:7.2-alpine
 
-COPY . /usr/src/wccta
-WORKDIR /usr/src/wccta
-
-RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip && rm -f php.tar.*
-RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
-RUN composer install
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+    && pecl install xdebug-2.7.0 \
+    && docker-php-ext-enable xdebug \
+    && apk del -f .build-deps
