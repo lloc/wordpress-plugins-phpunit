@@ -87,6 +87,11 @@ Now just execute `composer coverage`! This will create a directory `./reports/ph
 
     Error:         No code coverage driver is available
 
-Let's fix that in our docker-image.
+Let's fix that in our docker-image. I prepared a _Dockerfile_ so that you can just execute:
+                                    
+    docker build -t coverage .
 
- 
+And after the build process has been finished:
+
+    docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
+    
