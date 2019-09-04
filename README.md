@@ -95,3 +95,4 @@ And after the build process has been finished:
 
     docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
     
+_Now you know Kung Fu!_
