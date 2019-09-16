@@ -9,7 +9,8 @@ class CarTest extends TestCase {
 
 	public function test_getPrice() {
 		// Arrange
-		$sut = new Car();
+		$json = json_encode( [ 'price' => 14500 ] );
+		$sut  = new Car( $json );
 
 		// Act
 		$actual = $sut->getPrice();
