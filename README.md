@@ -159,3 +159,12 @@ We are ready to mock our first WordPress-function with
 
     Functions\expect( $name_of_function )->andReturn( $value );
 
+## Step 9
+
+To write a test for just one expectation seems too much effort. What if you want to test against different values?
+
+Dataprovider to the rescue. I already talked about annotations in step 5. This one is also very useful:
+
+    @dataprovider method_that_returns_data
+    
+Have a look at my example. `getData` returns an array of array. Each of these arrays contain 3 values. Our `test_getPrice`-method can so not only accept the dataprovider with the annotation. But it can also define the input-vars as paramters.

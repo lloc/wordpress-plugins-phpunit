@@ -2,24 +2,35 @@
 
 namespace tests\wccta;
 
-use Brain\Monkey;
 use Brain\Monkey\Functions;
 use wccta\Car;
 
 class CarTest extends WcctaTestCase {
 
-	public function test_getPrice() {
-		// Arrange
-		Functions\expect( 'number_format_i18n' )->andReturn( '14.500' );
+	public function getData() {
+		return [
+			[ 14500, '14.500', '€ 14.500' ],
+			[ 12345.67, '12345', '€ 12345' ],
+			[ null, '0', '€ 0' ],
+		];
+	}
 
-		$json = json_encode( [ 'price' => 14500 ] );
+	/**
+	 * @dataProvider getData
+	 */
+	public function test_getPrice( $intPrice, $stringPrice, $expected ) {
+		// Arrange
+		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
+
+		$json = json_encode( [ 'price' => $intPrice ] );
 		$sut  = new Car( $json );
 
 		// Act
 		$actual = $sut->getPrice();
 
 		// Assert
-		$this->assertEquals( '€ 14.500', $actual );
+
+		$this->assertEquals( $expected, $actual );
 	}
 
 }
