@@ -14,5 +14,8 @@
     "scripts": {
         "test": "./vendor/bin/phpunit",
         "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"
+    },
+    "require": {
+        "ext-json": "*"
     }
 }

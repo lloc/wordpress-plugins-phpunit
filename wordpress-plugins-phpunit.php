@@ -11,13 +11,12 @@ Domain Path: /languages
 Text Domain: wordpress-plugins-phpunit
 */
 
-/********************************
- * Globals definitions *
- *******************************/
-
 defined( 'ABSPATH' ) || die( 'Error 403: Access Denied/Forbidden!' );
 define( 'WCCTA_PLUGIN_DIR', ( function_exists( 'plugin_dir_path' ) ? plugin_dir_path( __FILE__ ) : __DIR__ . '/' ) );
+
 
 if ( file_exists( WCCTA_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 	require_once WCCTA_PLUGIN_DIR . 'vendor/autoload.php';
 }
+
+wccta\Plugin::init();

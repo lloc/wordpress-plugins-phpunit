@@ -1,5 +1,7 @@
 <?php
 
+namespace tests\wccta;
+
 use PHPUnit\Framework\TestCase;
 use Brain\Monkey;
 use wccta\Plugin;
