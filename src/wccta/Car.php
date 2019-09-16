@@ -13,6 +13,6 @@ class Car {
 	public function getPrice() {
 		$price = $this->data->price ?? 0;
 
-		return sprintf( '€ %s', number_format( $price, 0, ',', '.' ) );
+		return sprintf( '€ %s', number_format_i18n( $price ) );
 	}
 }

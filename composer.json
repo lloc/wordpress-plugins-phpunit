@@ -11,6 +11,11 @@
             "wccta\\": "src/wccta"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\wccta\\": "tests/wccta"
+        }
+    },
     "scripts": {
         "test": "./vendor/bin/phpunit",
         "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"

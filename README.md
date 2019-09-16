@@ -125,4 +125,37 @@ At this point let me introduce also the testing pattern AAA (Arrange Act Assert)
 
 ## Step 7
 
-Let's now implement the getPrice-method. 
+Let's now implement the getPrice-method.
+
+First of all let's assume that we can pass a JSON-object to our car class. This will give our class a bit more value.
+
+Now write an constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
+
+The member-variable `price` should be an integer. This is probably right now no problem because you can use the PHP-function `number_format` to create the correct output. But in a WordPress installation you'll expect very likely to have the locale set, to *Italian (it_IT)* for example.
+
+## Step 8
+
+The correct way to format numbers in WordPress is the use of the function `number_format_i18n()`.
+
+So let's change that and see what will happen:
+
+`Error: Call to undefined function wccta\number_format_i18n()`
+
+We will fix this in a second, but let's prepare this a bit first. Brain Monkey uses the `setUp()` and `tearDown()` provided by PHPUnit. You can [override those methods](https://brain-wp.github.io/BrainMonkey/docs/wordpress-setup.html). Let's create a custom TestCase - let's name it WcctaCase - that we can extend because we'll do this probably in every test-class.
+
+Now let's include the namespace for tests in the section autoload-dev:
+
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\wccta\\": "tests/wccta"
+        }
+    },
+
+Finally, let's change the parent of our test-classes.
+
+    class CarTest extends WcctaTestCase { // ... }
+
+We are ready to mock our first WordPress-function with
+
+    Functions\expect( $name_of_function )->andReturn( $value );
+
