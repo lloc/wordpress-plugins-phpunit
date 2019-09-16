@@ -111,7 +111,7 @@ _Run the unittests with the coverage-report again!_
 
 You did maybe notice the column `CRAP` in the coverage report. CRAP is an acronym for **change risk anti-patterns**. It indicates how risky a change of code in a class or method can be. You can lower the risk (and therefore the index) with less complex code **and** full coverage with tests.
     
-# Step 6
+## Step 6
 
 Let's start to test something. But what? There is still no further functionality written that needs testing.
  
@@ -123,3 +123,6 @@ Let's first create a Test `CarTest` that shall test if the method `getPrice` ret
 
 At this point let me introduce also the testing pattern AAA (Arrange Act Assert) which is widely accepted in TDD. It describes how to arrange a test and is very similar to GWT (Given When Then) from [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) (Behavior-driven Development).
 
+## Step 7
+
+Let's now implement the getPrice-method. 
