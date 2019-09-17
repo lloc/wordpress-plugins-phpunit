@@ -97,11 +97,11 @@ And after the build process has been finished:
 
     docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
     
-_Now you know Kung Fu!_ Please, open the `./reports/php/coverage/index.html` in your browser!
+_Now you know Kung Fu!_ Please, open the file _./reports/php/coverage/index.html_ in your browser!
 
 ## Step 5
 
-Let's wire our `Plugin` class to the plugin. Before we really go into testing, I'll just show you how to declare parts of your codes as not to test.
+Let's wire our `Plugin`-class to the plugin. Before we really go into testing, I'll just show you how to declare parts of your codes as not to test.
 
     @codeCoverageIgnore
 
@@ -109,7 +109,7 @@ This is one of the important [annotations](https://phpunit.readthedocs.io/en/8.3
 
 _Run the unittests with the coverage-report again!_
 
-You did maybe notice the column `CRAP` in the coverage report. CRAP is an acronym for **change risk anti-patterns**. It indicates how risky a change of code in a class or method can be. You can lower the risk (and therefore the index) with less complex code **and** full coverage with tests.
+You did maybe notice the column `CRAP` in the coverage report. _CRAP_ is an acronym for **change risk anti-patterns**. It indicates how risky a change of code in a class or method can be. You can lower the risk (and therefore the index) with less complex code **and** full coverage with tests.
     
 ## Step 6
 
@@ -121,7 +121,7 @@ Even if you decide _not_ to use this technique, you should at least know what we
 
 Let's first create a Test `CarTest` that should test if the method `getPrice` returns the string `'€ 14.500'`. Then create a Class `Car` and write the method `getPrice` that **satisfies** the test. Don't start with the implementation.
 
-At this point let me introduce also the testing pattern AAA (Arrange Act Assert) which is widely accepted in TDD. It describes how to arrange a test and is very similar to GWT (Given When Then) from [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) (Behavior-driven Development).
+At this point let me introduce also the testing pattern **AAA** (Arrange Act Assert) which is widely accepted in **TDD**. It describes how to arrange a test and is very similar to **GWT** (Given When Then) from [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) (Behavior-driven Development).
 
 ## Step 7
 
