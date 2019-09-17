@@ -10,13 +10,13 @@ _Optional, but you might need to [get docker](https://docs.docker.com/install/) 
 
 ## Step 4
 
-Lets create a directory that will give a home to our source-code. This is the place where you'll put a first class that you'll test soon.
+Let's create a directory that will give a home to our source-code. This is the place where you'll put a first class that you'll test soon.
 
     mkdir -p src/wccta && touch src/wccta/Plugin.php
     rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
     touch wordpress-plugins-phpunit.php
 
-We want to test some method of the class plugin. Imagine a method called `is_loaded` that returns `true` on success. When you are ready, execute:
+We want to test some methods of the class `Plugin`. Imagine a method called `is_loaded` that returns `true` on success. When you are ready, execute:
 
     composer test
 
@@ -24,7 +24,7 @@ _Hint_: Your system or PHP version is not up to date? You could just skip this s
         
     docker run -it --rm -v $PWD:/app -w /app php:7.3-alpine php ./vendor/bin/phpunit
  
-You can probably imagine that some plugins will have lots of classes and that you can easily forget to test all the functionality that need tests.
+You can probably imagine that some plugins will have lots of classes and that you can easily forget to test all the functionalities that need testing.
 
 So, let's talk about __Coverage__!
 
@@ -52,4 +52,4 @@ And after the build process has been finished:
 
     docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
     
-_Now you know Kung Fu!_ Please, open the `./reports/php/coverage/index.html` in your browser!
+_Now you know Kung Fu!_ Please, open the file _./reports/php/coverage/index.html_ in your browser!
