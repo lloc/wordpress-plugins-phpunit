@@ -37,7 +37,7 @@ This will automatically install also [Mockery](http://docs.mockery.io/en/latest/
 
 ## Step 3
 
-Let's create a directory that will be the home for a small test-class named *WcctaTest.php*:
+Let's create a directory that will give a home to our source-code. This is the place to put a first class that you'll test soon.
 
     mkdir -p tests/wccta
 
@@ -61,7 +61,7 @@ Lets create a directory that will give a home to our source-code. This is the pl
     rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
     touch wordpress-plugins-phpunit.php
 
-We want to test some method of the class plugin. Imagine a method called `is_loaded` that returns `true` on success. When you are ready, execute:
+We want to test some methods of the class `Plugin`. Imagine a method called is_loaded that returns true on success. When you are ready, execute:
 
     composer test
 
@@ -69,7 +69,7 @@ _Hint_: Your system or PHP version is not up to date? You could just skip this s
         
     docker run -it --rm -v $PWD:/app -w /app php:7.3-alpine php ./vendor/bin/phpunit
  
-You can probably imagine that some plugins will have lots of classes and that you can easily forget to test all the functionality that need tests.
+You can probably imagine that some plugins will have lots of classes and that you can easily forget to test all the functionalities that need testing.
 
 So, let's talk about __Coverage__!
 
@@ -101,11 +101,11 @@ _Now you know Kung Fu!_ Please, open the `./reports/php/coverage/index.html` in 
 
 ## Step 5
 
-Let's wire our Plugin class to the plugin. Before we really go into testing, I just show you how to declare parts of your codes as _not to test_.
+Let's wire our `Plugin` class to the plugin. Before we really go into testing, I'll just show you how to declare parts of your codes as not to test.
 
     @codeCoverageIgnore
-    
-This is one of the important [annotations](https://phpunit.readthedocs.io/en/8.3/annotations.html) that are available. We will come to this later, but first:
+
+This is one of the important [annotations](https://phpunit.readthedocs.io/en/8.3/annotations.html) that are available. We'll get back to this later, but first:
 
 _Run the unittests with the coverage-report again!_
 
@@ -117,31 +117,31 @@ Let's start to test something. But what? There is still no further functionality
  
 Here comes [TDD](https://it.wikipedia.org/wiki/Test_driven_development) (Test Driven Development) into the game.
 
-Even if you decide to *not* to use this technique, you should at least know what we are talking about.
+Even if you decide _not_ to use this technique, you should at least know what we are talking about.
 
-Let's first create a Test `CarTest` that shall test if the method `getPrice` returns the string `'€ 14.500'`. Then create a Class `Car` and write the method `getPrice` that **satisfies** the test. Don't start with the implementation.
+Let's first create a Test `CarTest` that should test if the method `getPrice` returns the string `'€ 14.500'`. Then create a Class `Car` and write the method `getPrice` that **satisfies** the test. Don't start with the implementation.
 
 At this point let me introduce also the testing pattern AAA (Arrange Act Assert) which is widely accepted in TDD. It describes how to arrange a test and is very similar to GWT (Given When Then) from [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) (Behavior-driven Development).
 
 ## Step 7
 
-Let's now implement the getPrice-method.
+Let's now implement the `getPrice`-method.
 
-First of all let's assume that we can pass a JSON-object to our car class. This will give our class a bit more value.
+First of all assume that we can pass a JSON-object to our `Car`-class. This will give our class a bit more value.
 
-Now write an constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
+Now write a constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
 
-The member-variable `price` should be an integer. This is probably right now no problem because you can use the PHP-function `number_format` to create the correct output. But in a WordPress installation you'll expect very likely to have the locale set, to *Italian (it_IT)* for example.
+The variable `price` should be an integer. This is probably no problem right now because you can use the PHP-function `number_format()` to create the correct output. But in a WordPress installation you'll expect to have the locale set, to `it_IT` (Italian) for example.
 
 ## Step 8
 
 The correct way to format numbers in WordPress is the use of the function `number_format_i18n()`.
 
-So let's change that and see what will happen:
+So let's change that and see what happens:
 
 `Error: Call to undefined function wccta\number_format_i18n()`
 
-We will fix this in a second, but let's prepare this a bit first. Brain Monkey uses the `setUp()` and `tearDown()` provided by PHPUnit. You can [override those methods](https://brain-wp.github.io/BrainMonkey/docs/wordpress-setup.html). Let's create a custom TestCase - let's name it WcctaCase - that we can extend because we'll do this probably in every test-class.
+We will fix this in a second, but let's prepare this a bit first. Brain Monkey uses the `setUp()` and `tearDown()` provided by PHPUnit. You can [override those methods](https://brain-wp.github.io/BrainMonkey/docs/wordpress-setup.html). Let's create a custom `TestCase` - name it `WcctaCase` - that we can extend because we'll do this probably in every test-class.
 
 Now let's include the namespace for tests in the section autoload-dev:
 
@@ -161,10 +161,10 @@ We are ready to mock our first WordPress-function with
 
 ## Step 9
 
-To write a test for just one expectation seems too much effort. What if you want to test against different values?
+Writing a test for just one expectation seems too much effort. What if you want to test against different values?
 
 Dataprovider to the rescue. I already talked about annotations in step 5. This one is also very useful:
 
     @dataprovider method_that_returns_data
     
-Have a look at my example. `getData` returns an array of array. Each of these arrays contain 3 values. Our `test_getPrice`-method can so not only accept the dataprovider with the annotation. But it can also define the input-vars as paramters.
+Have a look at my example. `getData` returns an array of arrays. Each of these arrays contains 3 values. Our `test_getPrice`-method can so not only accept the dataprovider with the annotation, but it can also define the input-vars as parameters.
