@@ -15,7 +15,7 @@ There are at least two valid frameworks that come handy when you plan to test Wo
 - [WP_Mock](https://github.com/10up/wp_mock)
 - [Brain Monkey](https://brain-wp.github.io/BrainMonkey/)
 
-Let's try *Brain Monkey*:
+Let's try **Brain Monkey**:
 
 `composer require --dev brain/monkey:2.*`
 
