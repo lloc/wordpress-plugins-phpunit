@@ -10,7 +10,7 @@ _Optional, but you might need to [get docker](https://docs.docker.com/install/) 
 
 ## Step 1
 
-I assume you have composer installed. Let's install *PHPUnit* first:
+I assume you have [Composer](https://getcomposer.org/) installed. Let's install [PHPUnit](https://phpunit.de/) first:
 
     composer require --dev phpunit/phpunit ^8.3
 
@@ -18,7 +18,7 @@ Please, check also the [requirements](https://phpunit.readthedocs.io/en/8.3/inst
 
 > PHPUnit 8.3 requires at least PHP 7.2! By the way - security support for PHP 7.1 ends on 1st of December 2019.
 
-_Hint_: You don't have composer installed? Try this!
+_Hint_: You don't have **Composer** installed? Try this!
 
     docker run --rm -it -v $PWD:/app -u $(id -u):$(id -g) composer install
  
@@ -29,7 +29,7 @@ There are at least two valid frameworks that come handy when you plan to test Wo
 - [WP_Mock](https://github.com/10up/wp_mock)
 - [Brain Monkey](https://brain-wp.github.io/BrainMonkey/)
 
-Let's try *Brain Monkey*:
+Let's try **Brain Monkey**:
 
 `composer require --dev brain/monkey:2.*`
 
@@ -37,7 +37,7 @@ This will automatically install also [Mockery](http://docs.mockery.io/en/latest/
 
 ## Step 3
 
-Let's create a directory that will give a home to our source-code. This is the place to put a first class that you'll test soon.
+Create a directory that will give a home to a small test-class named _WcctaTest.php_:
 
     mkdir -p tests/wccta
 
@@ -45,7 +45,7 @@ Excellent! Now let's create a *phpunit.xml* configuration file in the root direc
 
 > You could also decide to run your tests with the configuration parameters from the command-line. See the next part (hint: 'scripts')!  
 
-Great! Now let's add some sections to *composer.json* file:
+Great! Add some sections to the *composer.json* file:
 
 - **name**: that's the project's name for packagist.org
 - **description**: that's the description for packagist.org
@@ -55,13 +55,13 @@ Great! Now let's add some sections to *composer.json* file:
 
 ## Step 4
 
-Lets create a directory that will give a home to our source-code. This is the place where you'll put a first class that you'll test soon.
+Let's create a directory that will give a home to our source-code. This is the place where you'll put a first class that you'll test soon.
 
     mkdir -p src/wccta && touch src/wccta/Plugin.php
     rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
     touch wordpress-plugins-phpunit.php
 
-We want to test some methods of the class `Plugin`. Imagine a method called is_loaded that returns true on success. When you are ready, execute:
+We want to test some methods of the class `Plugin`. Imagine a method called `is_loaded` that returns `true` on success. When you are ready, execute:
 
     composer test
 
@@ -131,17 +131,17 @@ First of all assume that we can pass a JSON-object to our `Car`-class. This will
 
 Now write a constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
 
-The variable `price` should be an integer. This is probably no problem right now because you can use the PHP-function `number_format()` to create the correct output. But in a WordPress installation you'll expect to have the locale set, to `it_IT` (Italian) for example.
+The variable `price` should be an integer. This is probably no problem right now because you can use the PHP-function `number_format()` to create the correct output. But in a _WordPress_ installation you'll expect to have the locale set, to `it_IT` (Italian) for example.
 
 ## Step 8
 
-The correct way to format numbers in WordPress is the use of the function `number_format_i18n()`.
+The correct way to format numbers in _WordPress_ is the use of the function `number_format_i18n()`.
 
 So let's change that and see what happens:
 
 `Error: Call to undefined function wccta\number_format_i18n()`
 
-We will fix this in a second, but let's prepare this a bit first. Brain Monkey uses the `setUp()` and `tearDown()` provided by PHPUnit. You can [override those methods](https://brain-wp.github.io/BrainMonkey/docs/wordpress-setup.html). Let's create a custom `TestCase` - name it `WcctaCase` - that we can extend because we'll do this probably in every test-class.
+We will fix this in a second, but let's prepare this a bit first. **Brain Monkey** uses the `setUp()` and `tearDown()` provided by **PHPUnit**. You can [override those methods](https://brain-wp.github.io/BrainMonkey/docs/wordpress-setup.html). Let's create a custom `TestCase` - name it `WcctaCase` - that we can extend because we'll do this probably in every test-class.
 
 Now let's include the namespace for tests in the section autoload-dev:
 
@@ -155,7 +155,7 @@ Finally, let's change the parent of our test-classes.
 
     class CarTest extends WcctaTestCase { // ... }
 
-We are ready to mock our first WordPress-function with
+We are ready to mock our first _WordPress_-function with
 
     Functions\expect( $name_of_function )->andReturn( $value );
 
