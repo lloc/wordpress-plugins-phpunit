@@ -205,4 +205,15 @@ Excellent! Let's create a test for our Factory. We will let the method without a
     This test did not perform any assertions
 
 The tests pass but you get the message that there was a risky test. By the way: Name the function `test_create` just `create` and use the annotation `@test`. I believe that the use of that annotation depends on your personal taste! 
-   
+
+## Step 12
+
+We will now dive a bit deeper into this.
+
+Create an interface `FooterInterface` that defines a public method `info` which won't expect any return value. Implement the interface in `Car`, `info` could - for example - output a funny message.
+
+Define the return type `FooterInterface` for the `create`-method of `Factory` and add the `info`-method of `Car` to the WordPress-Action `wp_footer`.
+
+Now let's test this in the `FactoryTest`. There are at least two ways to test this properly. Use [has_action](https://brain-wp.github.io/BrainMonkey/docs/wordpress-hooks-added.html) or `Actions\expectAdded()`. A test for filters would be similar and is well described on the linked page.
+
+Check if `composer test` still passes all tests.

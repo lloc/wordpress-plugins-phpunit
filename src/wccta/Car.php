@@ -2,7 +2,7 @@
 
 namespace wccta;
 
-class Car {
+class Car implements FooterInterface {
 
 	protected $data;
 
@@ -15,4 +15,9 @@ class Car {
 
 		return sprintf( '€ %s', number_format_i18n( $price ) );
 	}
+
+	public function info(): void {
+		echo "When I grow up I'll be a Ferrari.", PHP_EOL;
+	}
+
 }
