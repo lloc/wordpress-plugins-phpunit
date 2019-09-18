@@ -224,3 +224,4 @@ How is the coverage right now? Execute `composer coverage` and check the generat
 
 The `info`-method of our `Car`-class is not covered by any test. But can we test the output of a method?
 
+Turns out it is quite easy with [expectOutputString](https://phpunit.readthedocs.io/en/8.3/writing-tests-for-phpunit.html?highlight=expectOutputString).
