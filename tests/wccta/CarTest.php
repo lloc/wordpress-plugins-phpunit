@@ -22,14 +22,23 @@ class CarTest extends WcctaTestCase {
 		// Arrange
 		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
 
-		$json = (object) [ 'price' => $intPrice ];
-		$sut  = new Car( $json );
+		$obj = (object) [ 'price' => $intPrice ];
+		$sut = new Car( $obj );
 
 		// Act
 		$actual = $sut->getPrice();
 
 		// Assert
 		$this->assertEquals( $expected, $actual );
+	}
+
+	public function test_info() {
+		$string = "When I grow up I'll be a Ferrari." . PHP_EOL;
+		$obj    = new \stdClass();
+		$sut    = new Car( $obj );
+
+		$this->expectOutputString( $string );
+		$sut->info();
 	}
 
 }

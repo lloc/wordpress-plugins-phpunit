@@ -217,3 +217,10 @@ Define the return type `FooterInterface` for the `create`-method of `Factory` an
 Now let's test this in the `FactoryTest`. There are at least two ways to test this properly. Use [has_action](https://brain-wp.github.io/BrainMonkey/docs/wordpress-hooks-added.html) or `Actions\expectAdded()`. A test for filters would be similar and is well described on the linked page.
 
 Check if `composer test` still passes all tests.
+
+## Step 13
+
+How is the coverage right now? Execute `composer coverage` and check the generated output.
+
+The `info`-method of our `Car`-class is not covered by any test. But can we test the output of a method?
+
