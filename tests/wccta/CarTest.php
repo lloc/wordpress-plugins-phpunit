@@ -29,7 +29,6 @@ class CarTest extends WcctaTestCase {
 		$actual = $sut->getPrice();
 
 		// Assert
-
 		$this->assertEquals( $expected, $actual );
 	}
 

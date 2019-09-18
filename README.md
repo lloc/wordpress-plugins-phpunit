@@ -125,12 +125,16 @@ At this point let me introduce also the testing pattern **AAA** (Arrange Act Ass
 
 ## Step 7
 
+You can test your classes if they throw exception in certain conditions.
 Let's now implement the `getPrice`-method.
 
+Just create a class `Registry` that sets a mixed value as a named item in an internal array. Use a method `set()` or the magic method `__set()` for this.
 First of all assume that we can pass a JSON-object to our `Car`-class. This will give our class a bit more value.
 
+Another method `get` or `__get()` should check if an item with a given exists and return it on success. If there is no such item, throw an `\OutOfBoundsException`.
 Now write a constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
 
+Check branch _step-10_ out if you have a hard time to write the code!
 The variable `price` should be an integer. This is probably no problem right now because you can use the PHP-function `number_format()` to create the correct output. But in a _WordPress_ installation you'll expect to have the locale set, to `it_IT` (Italian) for example.
 
 ## Step 8
