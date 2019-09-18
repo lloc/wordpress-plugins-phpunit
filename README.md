@@ -168,3 +168,13 @@ Dataprovider to the rescue. I already talked about annotations in step 5. This o
     @dataprovider method_that_returns_data
     
 Have a look at my example. `getData` returns an array of arrays. Each of these arrays contains 3 values. Our `test_getPrice`-method can so not only accept the dataprovider with the annotation, but it can also define the input-vars as parameters.
+
+## Step 10
+
+You can test your classes if they throw exception in certain conditions.
+
+Just create a class `Registry` that sets a mixed value as a named item in an internal array. Use a method `set()` or the magic method `__set()` for this.
+
+Another method `get` or `__get()` should check if an item with a given exists and return it on success. If there is no such item, throw an `\OutOfBoundsException`.
+
+Check branch _step-10_ out if you have a hard time to write the code!
