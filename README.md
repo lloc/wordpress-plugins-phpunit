@@ -225,3 +225,29 @@ How is the coverage right now? Execute `composer coverage` and check the generat
 The `info`-method of our `Car`-class is not covered by any test. But can we test the output of a method?
 
 Turns out it is quite easy with [expectOutputString](https://phpunit.readthedocs.io/en/8.3/writing-tests-for-phpunit.html?highlight=expectOutputString).
+
+## Finale
+
+Let's celebrate what we learned!
+
+Create am class `Locale` that has a public method `get` that return `get_locale()`. Exclude  the method from coverage!
+
+Now create a constructor in our `Plugin`-class that accepts a `Locale`-instance and store it in a member-var `$this->locale`. Create then a method `get_region_code` that returns the value of `$this->locale->get()`. Ah, and remove the `is_loaded`-method. ;)
+
+In our test we could create an object of type `Locale`, mock the WordPress-function `get_locale` and pass it to the `Plugin`-constructor! But I want tuse Mocker here:
+
+	public function test_get_region_code() {
+		$code   = 'it_IT';
+		$locale = \Mockery::mock( Locale::class );
+		$locale->shouldReceive( 'get' )->andReturn( $code );
+
+		$sut = new Plugin( $locale );
+
+		$this->assertEquals( $code, $sut->get_region_code() );
+	}
+
+**Now you can go and make your WordPress-plugins bulletproof!**
+
+_Have fun!_
+
+

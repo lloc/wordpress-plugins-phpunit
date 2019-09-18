@@ -4,19 +4,23 @@ namespace wccta;
 
 class Plugin {
 
+	public $locale;
+
+	public function __construct( Locale $locale ) {
+		$this->locale = $locale;
+	}
+
 	/**
 	 * @codeCoverageIgnore
 	 */
 	public static function create(): self {
-		$obj = new self();
+		$locale = new Locale();
 
-		// Do some things with $obj
-
-		return $obj;
+		return new self( $locale );
 	}
 
-	public function is_loaded() {
-		return true;
+	public function get_region_code() {
+		return $this->locale->get();
 	}
 
 }
