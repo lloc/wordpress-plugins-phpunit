@@ -22,7 +22,7 @@ class CarTest extends WcctaTestCase {
 		// Arrange
 		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
 
-		$json = json_encode( [ 'price' => $intPrice ] );
+		$json = (object) [ 'price' => $intPrice ];
 		$sut  = new Car( $json );
 
 		// Act

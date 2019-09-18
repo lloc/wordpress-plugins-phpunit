@@ -6,8 +6,8 @@ class Car {
 
 	protected $data;
 
-	public function __construct( string $json ) {
-		$this->data = json_decode( $json );
+	public function __construct( object $data ) {
+		$this->data = $data;
 	}
 
 	public function getPrice() {

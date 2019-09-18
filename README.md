@@ -182,3 +182,27 @@ Just create a class `Registry` that sets a mixed value as a named item in an int
 Another method `get` or `__get()` should check if an item with a given exists and return it on success. If there is no such item, throw an `\OutOfBoundsException`.
 
 Check branch _step-10_ out if you have a hard time to write the code!
+
+## Step 11
+
+The last steps brought us to _Factories_. What is a factory? Sometimes you create functions or methods that simply hide the complex process to create a specific object. And sometimes you have to decide which type of object you want to create.
+
+In WordPress plugins I prefer to add hooks in factories to objects. There are plugins that add hooks in class-constructors. This is not a good thing (especially when you still test the classic way -creating an complete environment with WordPress up and running).
+
+Let's create a class `Factory` with a static function named `create`. This method should return a `Car` object. But let's refactor the constructor of `Car` so that it expects already an object and no JSON-string. We will do this in the create-method of the `Factory`-class instead.
+
+Test your plugin now with `composer test` and you'll see some errors:
+
+`TypeError: Argument 1 passed to wccta\Car::__construct() must be an object, string given, called in ...`
+
+We should correct our tests too...
+
+Excellent! Let's create a test for our Factory. We will let the method without any content for now. Run the tests again!
+
+    There was 1 risky test:
+     
+    1) tests\wccta\FactoryTest::test_create
+    This test did not perform any assertions
+
+The tests pass but you get the message that there was a risky test. By the way: Name the function `test_create` just `create` and use the annotation `@test`. I believe that the use of that annotation depends on your personal taste! 
+   
