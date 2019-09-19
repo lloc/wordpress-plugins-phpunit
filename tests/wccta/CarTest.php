@@ -26,7 +26,7 @@ class CarTest extends WcctaTestCase {
 		$sut  = new Car( $json );
 
 		// Act
-		$actual = $sut->getPrice();
+		$actual = $sut->get_price();
 
 		// Assert
 		$this->assertEquals( $expected, $actual );

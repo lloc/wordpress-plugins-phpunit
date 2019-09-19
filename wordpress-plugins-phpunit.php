@@ -19,4 +19,4 @@ if ( file_exists( WCCTA_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
 	require_once WCCTA_PLUGIN_DIR . 'vendor/autoload.php';
 }
 
-wccta\Plugin::init();
+wccta\Plugin::create();
