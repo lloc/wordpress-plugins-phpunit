@@ -10,7 +10,7 @@ class Car {
 		$this->data = $data;
 	}
 
-	public function getPrice() {
+	public function get_price() {
 		$price = $this->data->price ?? 0;
 
 		return sprintf( '€ %s', number_format_i18n( $price ) );
