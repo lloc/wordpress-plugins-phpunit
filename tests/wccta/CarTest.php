@@ -7,7 +7,7 @@ use wccta\Car;
 
 class CarTest extends WcctaTestCase {
 
-	public function getData() {
+	public function get_data() {
 		return [
 			[ 14500, '14.500', '€ 14.500' ],
 			[ 12345.67, '12345', '€ 12345' ],
@@ -16,13 +16,13 @@ class CarTest extends WcctaTestCase {
 	}
 
 	/**
-	 * @dataProvider getData
+	 * @dataProvider get_data
 	 */
-	public function test_getPrice( $intPrice, $stringPrice, $expected ) {
+	public function test_getPrice( $int_price, $string_price, $expected ) {
 		// Arrange
-		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
+		Functions\expect( 'number_format_i18n' )->andReturn( $string_price );
 
-		$json = json_encode( [ 'price' => $intPrice ] );
+		$json = json_encode( [ 'price' => $int_price ] );
 		$sut  = new Car( $json );
 
 		// Act
