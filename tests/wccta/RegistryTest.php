@@ -6,10 +6,6 @@ use wccta\Registry;
 
 class RegistryTest extends WcctaTestCase {
 
-	public function get_sut() {
-		return new Registry();
-	}
-
 	public function test_get() {
 		$test = new Registry();
 
