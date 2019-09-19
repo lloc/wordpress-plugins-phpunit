@@ -18,7 +18,7 @@ class CarTest extends WcctaTestCase {
 	/**
 	 * @dataProvider getData
 	 */
-	public function test_getPrice( $intPrice, $stringPrice, $expected ) {
+	public function test_get_price( $intPrice, $stringPrice, $expected ) {
 		// Arrange
 		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
 
@@ -26,7 +26,7 @@ class CarTest extends WcctaTestCase {
 		$sut = new Car( $obj );
 
 		// Act
-		$actual = $sut->getPrice();
+		$actual = $sut->get_price();
 
 		// Assert
 		$this->assertEquals( $expected, $actual );
