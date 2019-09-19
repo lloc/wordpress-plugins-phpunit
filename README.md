@@ -213,7 +213,7 @@ You can test your classes if they throw exception in certain conditions.
 
 Just create a class `Registry` that sets a mixed value as a named item in an internal array. Use a method `set()` or the magic method `__set()` for this.
 
-Another method `get` or `__get()` should check if an item with a given exists and return it on success. If there is no such item, throw an `\OutOfBoundsException`.
+Another method `get` or `__get()` should check if an item with a given key exists and returns it on success. If there is no such item, throw an `\OutOfBoundsException`.
 
 Check branch _step-10_ out if you have a hard time to write the code!
 
@@ -221,7 +221,7 @@ Check branch _step-10_ out if you have a hard time to write the code!
 
 The last steps brought us to _Factories_. What is a factory? Sometimes you create functions or methods that simply hide the complex process to create a specific object. And sometimes you have to decide which type of object you want to create.
 
-In WordPress plugins I prefer to add hooks in factories to objects. There are plugins that add hooks in class-constructors. This is not a good thing (especially when you still test the classic way -creating an complete environment with WordPress up and running).
+In WordPress plugins I prefer to add hooks in factories to objects. There are plugins that add hooks in class-constructors. This is not a good thing (especially when you still test the classic way -creating a complete environment with WordPress up and running).
 
 Let's create a class `Factory` with a static function named `create`. This method should return a `Car` object. But let's refactor the constructor of `Car` so that it expects already an object and no JSON-string. We will do this in the create-method of the `Factory`-class instead.
 
