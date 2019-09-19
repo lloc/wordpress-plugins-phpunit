@@ -2,7 +2,6 @@
 
 namespace tests\wccta;
 
-use Brain\Monkey;
 use Brain\Monkey\Functions;
 use wccta\Car;
 
