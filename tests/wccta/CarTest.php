@@ -18,11 +18,11 @@ class CarTest extends WcctaTestCase {
 	/**
 	 * @dataProvider get_data
 	 */
-	public function test_getPrice( $intPrice, $stringPrice, $expected ) {
+	public function test_getPrice( $int_price, $string_price, $expected ) {
 		// Arrange
-		Functions\expect( 'number_format_i18n' )->andReturn( $stringPrice );
+		Functions\expect( 'number_format_i18n' )->andReturn( $string_price );
 
-		$obj = (object) [ 'price' => $intPrice ];
+		$obj = (object) [ 'price' => $int_price ];
 		$sut = new Car( $obj );
 
 		// Act
