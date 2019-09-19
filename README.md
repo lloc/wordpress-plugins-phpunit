@@ -4,7 +4,9 @@ Repository for my workshop at [WordCamp Catania 2019](https://2019.catania.wordc
 
 _Optional, but you might need to [get docker](https://docs.docker.com/install/) installed:_
                        
-    sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
 
 ---
 
@@ -12,7 +14,9 @@ _Optional, but you might need to [get docker](https://docs.docker.com/install/) 
 
 I assume you have [Composer](https://getcomposer.org/) installed. Let's install [PHPUnit](https://phpunit.de/) first:
 
-    composer require --dev phpunit/phpunit ^8.3
+```
+composer require --dev phpunit/phpunit ^8.3
+```
 
 Please, check also the [requirements](https://phpunit.readthedocs.io/en/8.3/installation.html#requirements)!
 
@@ -20,7 +24,9 @@ Please, check also the [requirements](https://phpunit.readthedocs.io/en/8.3/inst
 
 _Hint_: You don't have **Composer** installed? Try this!
 
-    docker run --rm -it -v $PWD:/app -u $(id -u):$(id -g) composer install
+```
+docker run --rm -it -v $PWD:/app -u $(id -u):$(id -g) composer install
+```
  
 ## Step 2
 
@@ -31,7 +37,9 @@ There are at least two valid frameworks that come handy when you plan to test Wo
 
 Let's try **Brain Monkey**:
 
-`composer require --dev brain/monkey:2.*`
+```
+composer require --dev brain/monkey:2.*`
+```
 
 This will automatically install also [Mockery](http://docs.mockery.io/en/latest/) and [Patchwork](http://patchwork2.org/). Just execute `composer install` and you are good to go.
 
@@ -39,7 +47,9 @@ This will automatically install also [Mockery](http://docs.mockery.io/en/latest/
 
 Create a directory that will give a home to a small test-class named _WcctaTest.php_:
 
-    mkdir -p tests/wccta
+```
+mkdir -p tests/wccta
+```
 
 Excellent! Now let's create a *phpunit.xml* configuration file in the root directory.
 
@@ -57,17 +67,23 @@ Great! Add some sections to the *composer.json* file:
 
 Let's create a directory that will give a home to our source-code. This is the place where you'll put a first class that you'll test soon.
 
-    mkdir -p src/wccta && touch src/wccta/Plugin.php
-    rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
-    touch wordpress-plugins-phpunit.php
+```
+mkdir -p src/wccta && touch src/wccta/Plugin.php
+rm -f tests/wccta/WcctaTest.php && touch tests/wccta/PluginTest.php
+touch wordpress-plugins-phpunit.php
+```
 
 We want to test some methods of the class `Plugin`. Imagine a method called `is_loaded` that returns `true` on success. When you are ready, execute:
 
-    composer test
+```
+composer test
+```
 
 _Hint_: Your system or PHP version is not up to date? You could just skip this step but let's try something [not so] new!
         
-    docker run -it --rm -v $PWD:/app -w /app php:7.3-alpine php ./vendor/bin/phpunit
+```
+docker run -it --rm -v $PWD:/app -w /app php:7.3-alpine php ./vendor/bin/phpunit
+```
  
 You can probably imagine that some plugins will have lots of classes and that you can easily forget to test all the functionalities that need testing.
 
@@ -75,27 +91,37 @@ So, let's talk about __Coverage__!
 
 Just add a custom command to the scripts-section in your *composer.json*:
 
-    "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"
+```
+"coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"
+```
 
 and a filter to your *phpunit.xml*:
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory>./src</directory>
-        </whitelist>
-    </filter>
+```
+<filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory>./src</directory>
+    </whitelist>
+</filter>
+```
 
 Now just execute `composer coverage`! This will create a directory `./reports/php/coverage` together with some html-files. Well, not on all computers. Some will still get error-messages like:
 
-    Error:         No code coverage driver is available
+```
+Error:         No code coverage driver is available
+```
 
 Let's fix that in our docker-image. I prepared a _Dockerfile_ so that you can just execute:
-                                    
-    docker build -t coverage .
+
+```                                    
+docker build -t coverage .
+```
 
 And after the build process has been finished:
 
-    docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
+```
+docker run -it --rm -v $PWD:/app -w /app coverage:latest php ./vendor/bin/phpunit --coverage-html ./reports/php/coverage
+```
     
 _Now you know Kung Fu!_ Please, open the file _./reports/php/coverage/index.html_ in your browser!
 
@@ -103,7 +129,9 @@ _Now you know Kung Fu!_ Please, open the file _./reports/php/coverage/index.html
 
 Let's wire our `Plugin`-class to the plugin. Before we really go into testing, I'll just show you how to declare parts of your codes as not to test.
 
-    @codeCoverageIgnore
+```
+@codeCoverageIgnore
+```
 
 This is one of the important [annotations](https://phpunit.readthedocs.io/en/8.3/annotations.html) that are available. We'll get back to this later, but first:
 
@@ -149,19 +177,25 @@ We will fix this in a second, but let's prepare this a bit first. **Brain Monkey
 
 Now let's include the namespace for tests in the section autoload-dev:
 
-    "autoload-dev": {
-        "psr-4": {
-            "tests\\wccta\\": "tests/wccta"
-        }
-    },
+```
+"autoload-dev": {
+    "psr-4": {
+        "tests\\wccta\\": "tests/wccta"
+    }
+},
+```
 
 Finally, let's change the parent of our test-classes.
 
-    class CarTest extends WcctaTestCase { // ... }
+```
+class CarTest extends WcctaTestCase { // ... }
+```
 
 We are ready to mock our first _WordPress_-function with
 
-    Functions\expect( $name_of_function )->andReturn( $value );
+```
+Functions\expect( $name_of_function )->andReturn( $value );
+```
 
 ## Step 9
 
@@ -199,10 +233,12 @@ We should correct our tests too...
 
 Excellent! Let's create a test for our Factory. We will let the method without any content for now. Run the tests again!
 
-    There was 1 risky test:
-     
-    1) tests\wccta\FactoryTest::test_create
-    This test did not perform any assertions
+```
+There was 1 risky test:
+ 
+1) tests\wccta\FactoryTest::test_create
+This test did not perform any assertions
+```
 
 The tests pass but you get the message that there was a risky test. By the way: Name the function `test_create` just `create` and use the annotation `@test`. I believe that the use of that annotation depends on your personal taste! 
 
@@ -230,21 +266,23 @@ Turns out it is quite easy with [expectOutputString](https://phpunit.readthedocs
 
 Let's celebrate what we learned!
 
-Create am class `Locale` that has a public method `get` that return `get_locale()`. Exclude  the method from coverage!
+Create a class `Locale` that has a public method `get` that returns `get_locale()`. Exclude  the method from coverage!
 
 Now create a constructor in our `Plugin`-class that accepts a `Locale`-instance and store it in a member-var `$this->locale`. Create then a method `get_region_code` that returns the value of `$this->locale->get()`. Ah, and remove the `is_loaded`-method. ;)
 
 In our test we could create an object of type `Locale`, mock the WordPress-function `get_locale` and pass it to the `Plugin`-constructor! But I want tuse Mocker here:
 
-	public function test_get_region_code() {
-		$code   = 'it_IT';
-		$locale = \Mockery::mock( Locale::class );
-		$locale->shouldReceive( 'get' )->andReturn( $code );
+```
+public function test_get_region_code() {
+    $code   = 'it_IT';
+    $locale = \Mockery::mock( Locale::class );
+    $locale->shouldReceive( 'get' )->andReturn( $code );
 
-		$sut = new Plugin( $locale );
+    $sut = new Plugin( $locale );
 
-		$this->assertEquals( $code, $sut->get_region_code() );
-	}
+    $this->assertEquals( $code, $sut->get_region_code() );
+}
+```
 
 **Now you can go and make your WordPress-plugins bulletproof!**
 
