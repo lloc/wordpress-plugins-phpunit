@@ -4,7 +4,7 @@ namespace wccta;
 
 class Car {
 
-	public function getPrice() {
+	public function get_price() {
 		return '€ 14.500';
 	}
 }

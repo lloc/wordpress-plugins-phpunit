@@ -7,12 +7,12 @@ use wccta\Car;
 
 class CarTest extends TestCase {
 
-	public function test_getPrice() {
+	public function test_get_price() {
 		// Arrange
 		$sut = new Car();
 
 		// Act
-		$actual = $sut->getPrice();
+		$actual = $sut->get_price();
 
 		// Assert
 		$this->assertEquals( '€ 14.500', $actual );
