@@ -147,20 +147,20 @@ Here comes [TDD](https://it.wikipedia.org/wiki/Test_driven_development) (Test Dr
 
 Even if you decide _not_ to use this technique, you should at least know what we are talking about.
 
-Let's first create a Test `CarTest` that should test if the method `getPrice` returns the string `'€ 14.500'`. Then create a Class `Car` and write the method `getPrice` that **satisfies** the test. Don't start with the implementation.
+Let's first create a Test `CarTest` that should test if the method `get_price` returns the string `'€ 14.500'`. Then create a Class `Car` and write the method `get_price` that **satisfies** the test. Don't start with the implementation.
 
 At this point let me introduce also the testing pattern **AAA** (Arrange Act Assert) which is widely accepted in **TDD**. It describes how to arrange a test and is very similar to **GWT** (Given When Then) from [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) (Behavior-driven Development).
 
 ## Step 7
 
 You can test your classes if they throw exception in certain conditions.
-Let's now implement the `getPrice`-method.
+Let's now implement the `get_price`-method.
 
 Just create a class `Registry` that sets a mixed value as a named item in an internal array. Use a method `set()` or the magic method `__set()` for this.
 First of all assume that we can pass a JSON-object to our `Car`-class. This will give our class a bit more value.
 
 Another method `get` or `__get()` should check if an item with a given exists and return it on success. If there is no such item, throw an `\OutOfBoundsException`.
-Now write a constructor that handles the JSON input and stores the object in a member-var `data`. The `getPrice`-method should take the price from the `data` var and take care of the formatted output.
+Now write a constructor that handles the JSON input and stores the object in a member-var `data`. The `get_price`-method should take the price from the `data` var and take care of the formatted output.
 
 Check branch _step-10_ out if you have a hard time to write the code!
 The variable `price` should be an integer. This is probably no problem right now because you can use the PHP-function `number_format()` to create the correct output. But in a _WordPress_ installation you'll expect to have the locale set, to `it_IT` (Italian) for example.
